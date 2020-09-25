@@ -10,12 +10,27 @@ import Comment from "./resolvers/comment";
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers: {Query, Mutation, User, Comment,Post },
+  resolvers: { Query, Mutation, User, Comment, Post },
   context: {
     db,
+  },
+
+  // this healthcheck is very useful in liveness & readiness probes in the k8s or any cloud enviroments.
+  onHealthCheck: () => {
+    return new Promise((resolve, reject) => {
+      // Replace the `true` in this conditional with more specific checks!
+      if (true) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
   },
 });
 
 server.listen().then(({ url }) => {
   console.log(`server ready at ${url} 🚀 🚀 🚀 🚀`);
+  console.log(
+    `Health check is at: ${url}.well-known/apollo/server-health`,
+  );
 });
