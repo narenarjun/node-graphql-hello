@@ -4,7 +4,7 @@
   "description": "A simple Nodejs-Graphql Server",
   "main": "index.js",
   "scripts": {
-    "start": " npm run postbuild &&  node dist/index.js",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js --ext js --exec babel-node",
     "postbuild": "babel src --out-dir dist --copy-files"
